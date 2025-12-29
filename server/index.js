@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const movieRoutes = require('./routes/movieRoutes');
 const bookingRoutes = require('./routes/bookingRoutes'); // <--- Import this
+const paymentRoutes = require('./routes/paymentRoutes'); // <--- Import this
 
 const app = express();
 
@@ -21,7 +22,10 @@ app.use('/api/movies', movieRoutes);
 
 app.use('/api/bookings', bookingRoutes); // <--- Add this line
 
+app.use('/api/payment', paymentRoutes); // <--- Add this
+
 const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
 });
+

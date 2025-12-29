@@ -9,3 +9,18 @@ exports.getAllMovies = (req, res) => {
         res.json(results);
     });
 };
+
+// ADD A NEW MOVIE (Admin Only)
+exports.createMovie = (req, res) => {
+    const { title, description, poster_url, genre } = req.body;
+
+    const sql = "INSERT INTO movies (title, description, poster_url, genre) VALUES (?, ?, ?, ?)";
+    
+    db.query(sql, [title, description, poster_url, genre], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Database error" });
+        }
+        res.status(201).json({ message: "Movie added successfully!", movieId: result.insertId });
+    });
+};
